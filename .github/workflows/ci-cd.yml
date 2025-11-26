@@ -1,0 +1,35 @@
+name: CI-CD Demo
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund || true
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build (placeholder)
+        run: echo "Build step: packaging artifacts (placeholder)"
+
+      - name: Deploy (simulated)
+        run: |
+          echo "Simulated deploy to $GITHUB_WORKSPACE/deploy"
+          mkdir -p $GITHUB_WORKSPACE/deploy
+          cp -r * $GITHUB_WORKSPACE/deploy || true
+          echo "Deployment completed: $GITHUB_WORKSPACE/deploy/index.js"
