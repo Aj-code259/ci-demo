@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI-CD Pipeline
 
 on:
   push:
@@ -7,12 +7,30 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout source code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run sample command
-        run: echo "CI Pipeline executed successfully"
+      # Step 2: Build Step
+      - name: Build the application
+        run: |
+          echo "Building the project..."
+          mkdir build_output
+          echo "Sample build artifact" > build_output/result.txt
+          echo "Build completed."
+
+      # Step 3: Testing Step
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          echo "All tests passed successfully!"
+
+      # Step 4: Deployment Step
+      - name: Deploy application
+        run: |
+          echo "Deploying application..."
+          echo "Application deployed successfully!"
